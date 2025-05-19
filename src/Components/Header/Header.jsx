@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { FaLeaf } from "react-icons/fa";
 import React, { useState } from "react";
 
 export const Header = () => {
@@ -10,25 +12,44 @@ export const Header = () => {
   return (
     <header className="bg-green-100 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-green-700">🌿 Garden Hub</h1>
+        <h1 className="text-2xl font-bold text-green-700 flex items-center gap-2">
+          <Link
+            to="/"
+            className="flex items-center gap-2 hover:text-green-800 transition"
+          >
+            <FaLeaf className="text-green-600 text-3xl" />
+            Garden Hub
+          </Link>
+        </h1>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6 items-center">
-          <a href="#" className="hover:text-green-700 font-medium transition">
+          <Link to="/" className="hover:text-green-700 font-medium transition">
             Home
-          </a>
-          <a href="#" className="hover:text-green-700 font-medium transition">
+          </Link>
+          <Link
+            to="/share"
+            className="hover:text-green-700 font-medium transition"
+          >
             Share a Tip
-          </a>
-          <a href="#" className="hover:text-green-700 font-medium transition">
+          </Link>
+          <Link
+            to="/explore"
+            className="hover:text-green-700 font-medium transition"
+          >
             Explore Gardeners
-          </a>
-          <a href="#" className="hover:text-green-700 font-medium transition">
+          </Link>
+          <Link
+            to="/my-tips"
+            className="hover:text-green-700 font-medium transition"
+          >
             My Tips
-          </a>
-          <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-            Login
-          </button>
+          </Link>
+          <Link to="/login">
+            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+              Login
+            </button>
+          </Link>
         </nav>
 
         {/* Mobile Hamburger */}
@@ -45,21 +66,23 @@ export const Header = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <nav className="md:hidden px-4 pb-4 space-y-2 bg-green-50 shadow">
-          <a href="#" className="block text-green-700 font-medium">
+          <Link to="/" className="block text-green-700 font-medium">
             Home
-          </a>
-          <a href="#" className="block text-green-700 font-medium">
+          </Link>
+          <Link to="/share" className="block text-green-700 font-medium">
             Share a Tip
-          </a>
-          <a href="#" className="block text-green-700 font-medium">
+          </Link>
+          <Link to="/explore" className="block text-green-700 font-medium">
             Explore Gardeners
-          </a>
-          <a href="#" className="block text-green-700 font-medium">
+          </Link>
+          <Link to="/my-tips" className="block text-green-700 font-medium">
             My Tips
-          </a>
-          <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
-            Login
-          </button>
+          </Link>
+          <Link to="/login">
+            <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
+              Login
+            </button>
+          </Link>
         </nav>
       )}
     </header>

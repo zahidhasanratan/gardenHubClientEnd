@@ -22,8 +22,7 @@ export const Slider = () => {
             <div
               className="bg-cover bg-center h-[400px] flex items-center justify-center text-white text-center"
               style={{
-                backgroundImage:
-                  "url('https://source.unsplash.com/featured/?garden,nature')",
+                backgroundImage: "url('https://i.ibb.co/7TCjZyJ/1.jpg')",
               }}
             >
               <div className="bg-black/50 p-6 rounded-lg max-w-lg">
@@ -51,8 +50,7 @@ export const Slider = () => {
             <div
               className="bg-cover bg-center h-[400px] flex items-center justify-center text-white text-center"
               style={{
-                backgroundImage:
-                  "url('https://source.unsplash.com/featured/?plants,garden')",
+                backgroundImage: "url('https://i.ibb.co/dw9zYQc1/2.jpg')",
               }}
             >
               <div className="bg-black/50 p-6 rounded-lg max-w-lg">
@@ -82,8 +80,7 @@ export const Slider = () => {
             <div
               className="bg-cover bg-center h-[400px] flex items-center justify-center text-white text-center"
               style={{
-                backgroundImage:
-                  "url('https://source.unsplash.com/featured/?urban-garden')",
+                backgroundImage: "url('https://i.ibb.co/20NQXnh0/3.png')",
               }}
             >
               <div className="bg-black/50 p-6 rounded-lg max-w-lg">

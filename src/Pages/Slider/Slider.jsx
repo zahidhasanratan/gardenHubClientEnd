@@ -17,7 +17,7 @@ export const Slider = () => {
           autoplay={{ delay: 5000 }}
           className="mySwiper"
         >
-          {/* Slide 1 */}
+          {/* Slide 1 - Grow Together */}
           <SwiperSlide>
             <div
               className="bg-cover bg-center h-[400px] flex items-center justify-center text-white text-center"
@@ -45,7 +45,7 @@ export const Slider = () => {
             </div>
           </SwiperSlide>
 
-          {/* Slide 2 */}
+          {/* Slide 2 - Urban Gardening Made Simple */}
           <SwiperSlide>
             <div
               className="bg-cover bg-center h-[400px] flex items-center justify-center text-white text-center"
@@ -56,7 +56,7 @@ export const Slider = () => {
               <div className="bg-black/50 p-6 rounded-lg max-w-lg">
                 <h2 className="text-4xl font-bold mb-2">
                   <Typewriter
-                    words={["Tips & Tricks"]}
+                    words={["Urban Gardening Made Simple"]}
                     loop={false}
                     cursor
                     cursorStyle="|"
@@ -66,7 +66,7 @@ export const Slider = () => {
                   />
                 </h2>
                 <p className="mb-4">
-                  Get gardening tips from experienced growers
+                  Turn your balcony or rooftop into a garden
                 </p>
                 <button className="bg-green-500 px-6 py-2 rounded hover:bg-green-600 transition">
                   Learn More
@@ -75,7 +75,7 @@ export const Slider = () => {
             </div>
           </SwiperSlide>
 
-          {/* Slide 3 */}
+          {/* Slide 3 - Your Green Journey Starts Here */}
           <SwiperSlide>
             <div
               className="bg-cover bg-center h-[400px] flex items-center justify-center text-white text-center"
@@ -86,7 +86,7 @@ export const Slider = () => {
               <div className="bg-black/50 p-6 rounded-lg max-w-lg">
                 <h2 className="text-4xl font-bold mb-2">
                   <Typewriter
-                    words={["Join the Community"]}
+                    words={["Your Green Journey Starts Here"]}
                     loop={false}
                     cursor
                     cursorStyle="|"
@@ -95,7 +95,7 @@ export const Slider = () => {
                     delaySpeed={1000}
                   />
                 </h2>
-                <p className="mb-4">Connect with local gardeners near you</p>
+                <p className="mb-4">Join a community of passionate gardeners</p>
                 <button className="bg-green-500 px-6 py-2 rounded hover:bg-green-600 transition">
                   Join Now
                 </button>

@@ -14,7 +14,7 @@ export const GardenerOfMonth = () => {
         <Zoom delay={100} triggerOnce>
           <div className="bg-green-50 p-6 rounded-lg shadow-md flex flex-col md:flex-row items-center gap-6">
             <img
-              src="https://randomuser.me/api/portraits/women/32.jpg"
+              src="https://i.ibb.co/3mLK9HW9/rita-malcok-o-Oh-TXx5m-Jq-I-unsplash.jpg"
               className="w-32 h-32 rounded-full border-4 border-green-500"
               alt="Gardener of the Month - Monica Leaf"
             />

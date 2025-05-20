@@ -1,16 +1,70 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Zoom } from "react-awesome-reveal";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 export const Login = () => {
-  const handleEmailLogin = (e) => {
-    e.preventDefault();
-    console.log("Login with email and password");
+  const { signIn, signInWithGoogle, setUser } = useContext(AuthContext);
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleGoogleLogin = () => {
-    console.log("Login with Google");
+  const handleEmailLogin = async (e) => {
+    e.preventDefault();
+    const { email, password } = formData;
+
+    try {
+      const result = await signIn(email.trim(), password);
+      setUser(result.user);
+
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1600);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.message,
+        confirmButtonColor: "#16a34a",
+      });
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithGoogle();
+      setUser(result.user);
+
+      Swal.fire({
+        icon: "success",
+        title: "Signed in with Google!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1600);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Google Sign-In Failed",
+        text: error.message,
+        confirmButtonColor: "#16a34a",
+      });
+    }
   };
 
   return (
@@ -28,6 +82,9 @@ export const Login = () => {
               </label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="you@example.com"
@@ -40,6 +97,9 @@ export const Login = () => {
               </label>
               <input
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="••••••••"

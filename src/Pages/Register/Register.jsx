@@ -1,16 +1,93 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Zoom } from "react-awesome-reveal";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
 
 export const Register = () => {
-  const handleRegister = (e) => {
-    e.preventDefault();
-    console.log("User registered");
+  const { createUser, signInWithGoogle, setUser } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    photoURL: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleGoogleSignIn = () => {
-    // TODO: Add Firebase Google popup logic here later
-    console.log("Google sign-in popup triggered");
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+    return regex.test(password);
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const { name, email, photoURL, password } = formData;
+
+    if (!validatePassword(password)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Password",
+        text: "Password must be at least 8 characters and include uppercase, lowercase, and a special character.",
+        confirmButtonColor: "#16a34a",
+      });
+      return;
+    }
+
+    try {
+      const result = await createUser(email, password);
+      await updateProfile(result.user, { displayName: name, photoURL });
+      setUser(result.user);
+
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1600);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: error.message,
+        confirmButtonColor: "#16a34a",
+      });
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      setUser(result.user);
+
+      Swal.fire({
+        icon: "success",
+        title: "Signed in with Google!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1600);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Google Sign-In Failed",
+        text: error.message,
+        confirmButtonColor: "#16a34a",
+      });
+    }
   };
 
   return (
@@ -22,53 +99,29 @@ export const Register = () => {
           </h2>
 
           <form onSubmit={handleRegister} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-green-800">
-                Name
-              </label>
-              <input
-                type="text"
-                required
-                className="w-full px-4 py-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="John Doe"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-green-800">
-                Email
-              </label>
-              <input
-                type="email"
-                required
-                className="w-full px-4 py-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="you@example.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-green-800">
-                Photo URL
-              </label>
-              <input
-                type="url"
-                required
-                className="w-full px-4 py-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="https://your-photo-url.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-green-800">
-                Password
-              </label>
-              <input
-                type="password"
-                required
-                className="w-full px-4 py-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="••••••••"
-              />
-            </div>
+            {["name", "email", "photoURL", "password"].map((field) => (
+              <div key={field}>
+                <label className="block text-sm font-medium text-green-800 capitalize">
+                  {field === "photoURL" ? "Photo URL" : field}
+                </label>
+                <input
+                  type={field === "password" ? "password" : "text"}
+                  name={field}
+                  required
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                  placeholder={
+                    field === "photoURL"
+                      ? "https://your-photo-url.com"
+                      : field === "email"
+                      ? "you@example.com"
+                      : field === "password"
+                      ? "••••••••"
+                      : "John Doe"
+                  }
+                />
+              </div>
+            ))}
 
             <button
               type="submit"

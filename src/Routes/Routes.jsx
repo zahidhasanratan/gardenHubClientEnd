@@ -6,6 +6,12 @@ import { ErrorPage } from "../Pages/ErrorPage";
 import { Loader } from "../Components/Loader";
 import { Login } from "../Pages/Login/Login";
 import { Register } from "../Pages/Register/Register";
+import { ShareTip } from "../Pages/ShareTip/ShareTip";
+import { BrowseTips } from "../Pages/BrowseTips/BrowseTips";
+import { TipDetails } from "../Pages/BrowseTips/TipDetails";
+import { MyTips } from "../Pages/MyTips/MyTips";
+import { ExploreGardeners } from "../Pages/ExploreGardeners/ExploreGardeners";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +33,26 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/ShareTip",
+        element: <ShareTip />,
+      },
+      {
+        path: "/BrowseTips",
+        element: <BrowseTips />,
+      },
+      {
+        path: "/tips/:id",
+        element: <TipDetails />,
+      },
+      {
+        path: "/mytips",
+        element: <MyTips />,
+      },
+      {
+        path: "/exploreGardeners",
+        element: <ExploreGardeners />,
       },
     ],
   },

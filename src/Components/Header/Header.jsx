@@ -29,13 +29,13 @@ export const Header = () => {
             Home
           </Link>
           <Link
-            to="/explore"
+            to="/exploreGardeners"
             className="hover:text-green-700 font-medium transition"
           >
             Explore Gardeners
           </Link>
           <Link
-            to="/browse"
+            to="/BrowseTips"
             className="hover:text-green-700 font-medium transition"
           >
             Browse Tips
@@ -43,13 +43,13 @@ export const Header = () => {
           {user && (
             <>
               <Link
-                to="/share"
+                to="/ShareTip"
                 className="hover:text-green-700 font-medium transition"
               >
                 Share a Garden Tip
               </Link>
               <Link
-                to="/my-tips"
+                to="/mytips"
                 className="hover:text-green-700 font-medium transition"
               >
                 My Tips
@@ -106,18 +106,21 @@ export const Header = () => {
           <Link to="/" className="block text-green-700 font-medium">
             Home
           </Link>
-          <Link to="/explore" className="block text-green-700 font-medium">
+          <Link
+            to="/exploreGardeners"
+            className="block text-green-700 font-medium"
+          >
             Explore Gardeners
           </Link>
-          <Link to="/browse" className="block text-green-700 font-medium">
+          <Link to="/BrowseTips" className="block text-green-700 font-medium">
             Browse Tips
           </Link>
           {user && (
             <>
-              <Link to="/share" className="block text-green-700 font-medium">
+              <Link to="/ShareTip" className="block text-green-700 font-medium">
                 Share a Garden Tip
               </Link>
-              <Link to="/my-tips" className="block text-green-700 font-medium">
+              <Link to="/mytips" className="block text-green-700 font-medium">
                 My Tips
               </Link>
             </>

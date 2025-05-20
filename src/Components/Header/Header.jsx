@@ -23,31 +23,25 @@ export const Header = () => {
         </h1>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex space-x-6 items-center">
-          <Link to="/" className="hover:text-green-700 font-medium transition">
+        <nav className="hidden md:flex space-x-6 items-center text-green-700 font-medium">
+          <Link to="/" className="hover:text-green-800 transition">
             Home
           </Link>
-          <Link
-            to="/share"
-            className="hover:text-green-700 font-medium transition"
-          >
-            Share a Tip
-          </Link>
-          <Link
-            to="/explore"
-            className="hover:text-green-700 font-medium transition"
-          >
+          <Link to="/explore" className="hover:text-green-800 transition">
             Explore Gardeners
           </Link>
-          <Link
-            to="/my-tips"
-            className="hover:text-green-700 font-medium transition"
-          >
+          <Link to="/browse" className="hover:text-green-800 transition">
+            Browse Tips
+          </Link>
+          <Link to="/share" className="hover:text-green-800 transition">
+            Share a Garden Tip
+          </Link>
+          <Link to="/my-tips" className="hover:text-green-800 transition">
             My Tips
           </Link>
           <Link to="/login">
             <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-              Login
+              Login / SignUp
             </button>
           </Link>
         </nav>
@@ -65,22 +59,25 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <nav className="md:hidden px-4 pb-4 space-y-2 bg-green-50 shadow">
-          <Link to="/" className="block text-green-700 font-medium">
+        <nav className="md:hidden px-4 pb-4 space-y-2 bg-green-50 shadow text-green-700 font-medium">
+          <Link to="/" className="block">
             Home
           </Link>
-          <Link to="/share" className="block text-green-700 font-medium">
-            Share a Tip
-          </Link>
-          <Link to="/explore" className="block text-green-700 font-medium">
+          <Link to="/explore" className="block">
             Explore Gardeners
           </Link>
-          <Link to="/my-tips" className="block text-green-700 font-medium">
+          <Link to="/browse" className="block">
+            Browse Tips
+          </Link>
+          <Link to="/share" className="block">
+            Share a Garden Tip
+          </Link>
+          <Link to="/my-tips" className="block">
             My Tips
           </Link>
           <Link to="/login">
             <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
-              Login
+              Login / SignUp
             </button>
           </Link>
         </nav>

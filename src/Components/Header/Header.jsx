@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { FaLeaf } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 export const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const { user, logout } = useContext(AuthContext);
 
-  const toggleMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const toggleMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
+  const handleLogout = () => logout();
 
   return (
     <header className="bg-green-100 sticky top-0 z-50 shadow-md">
@@ -22,31 +24,72 @@ export const Header = () => {
           </Link>
         </h1>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex space-x-6 items-center text-green-700 font-medium">
-          <Link to="/" className="hover:text-green-800 transition">
+        <nav className="hidden md:flex space-x-6 items-center">
+          <Link to="/" className="hover:text-green-700 font-medium transition">
             Home
           </Link>
-          <Link to="/explore" className="hover:text-green-800 transition">
+          <Link
+            to="/explore"
+            className="hover:text-green-700 font-medium transition"
+          >
             Explore Gardeners
           </Link>
-          <Link to="/browse" className="hover:text-green-800 transition">
+          <Link
+            to="/browse"
+            className="hover:text-green-700 font-medium transition"
+          >
             Browse Tips
           </Link>
-          <Link to="/share" className="hover:text-green-800 transition">
-            Share a Garden Tip
-          </Link>
-          <Link to="/my-tips" className="hover:text-green-800 transition">
-            My Tips
-          </Link>
-          <Link to="/login">
-            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-              Login / SignUp
-            </button>
-          </Link>
+          {user && (
+            <>
+              <Link
+                to="/share"
+                className="hover:text-green-700 font-medium transition"
+              >
+                Share a Garden Tip
+              </Link>
+              <Link
+                to="/my-tips"
+                className="hover:text-green-700 font-medium transition"
+              >
+                My Tips
+              </Link>
+            </>
+          )}
+
+          {!user ? (
+            <Link to="/login">
+              <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                Login/SignUp
+              </button>
+            </Link>
+          ) : (
+            <div className="relative">
+              <img
+                src={user.photoURL}
+                alt="User"
+                title={user.displayName}
+                className="w-10 h-10 rounded-full cursor-pointer border border-green-500"
+                onClick={() => setShowDropdown(!showDropdown)}
+              />
+              {showDropdown && (
+                <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md overflow-hidden z-50">
+                  <div className="px-4 py-2 text-sm text-green-700 font-semibold border-b">
+                    {user.displayName}
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </nav>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
@@ -59,27 +102,40 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <nav className="md:hidden px-4 pb-4 space-y-2 bg-green-50 shadow text-green-700 font-medium">
-          <Link to="/" className="block">
+        <nav className="md:hidden px-4 pb-4 space-y-2 bg-green-50 shadow">
+          <Link to="/" className="block text-green-700 font-medium">
             Home
           </Link>
-          <Link to="/explore" className="block">
+          <Link to="/explore" className="block text-green-700 font-medium">
             Explore Gardeners
           </Link>
-          <Link to="/browse" className="block">
+          <Link to="/browse" className="block text-green-700 font-medium">
             Browse Tips
           </Link>
-          <Link to="/share" className="block">
-            Share a Garden Tip
-          </Link>
-          <Link to="/my-tips" className="block">
-            My Tips
-          </Link>
-          <Link to="/login">
-            <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
-              Login / SignUp
+          {user && (
+            <>
+              <Link to="/share" className="block text-green-700 font-medium">
+                Share a Garden Tip
+              </Link>
+              <Link to="/my-tips" className="block text-green-700 font-medium">
+                My Tips
+              </Link>
+            </>
+          )}
+          {!user ? (
+            <Link to="/login">
+              <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
+                Login/SignUp
+              </button>
+            </Link>
+          ) : (
+            <button
+              onClick={handleLogout}
+              className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+            >
+              Logout
             </button>
-          </Link>
+          )}
         </nav>
       )}
     </header>

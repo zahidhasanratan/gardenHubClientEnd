@@ -63,10 +63,9 @@ export const ShareTip = () => {
 
   return (
     <section className="max-w-3xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-green-700 mb-6">
+      <h2 className="text-4xl font-bold text-green-700 mb-8 text-center">
         ➕ Share a Garden Tip
       </h2>
-
       <form
         onSubmit={handleSubmit}
         className="space-y-4 bg-white p-6 rounded-lg shadow-md"

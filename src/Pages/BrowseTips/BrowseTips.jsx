@@ -37,7 +37,7 @@ export const BrowseTips = () => {
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-semibold text-green-700 mb-8">
+      <h2 className="text-4xl font-bold text-green-700 mb-8 text-center">
         📋 Browse Tips
       </h2>
 

@@ -1,40 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaThumbsUp } from "react-icons/fa";
 
-// Dummy data
-const dummyTips = [
-  {
-    _id: "1",
-    title: "How I Grow Tomatoes Indoors",
-    topic: "Indoor Gardening",
-    category: "Plant Care",
-    difficulty: "Easy",
-    description:
-      "This is a complete guide on how to grow tomatoes indoors using limited space and natural light.",
-    imageUrl: "https://via.placeholder.com/600x350?text=Tomatoes",
-    availability: "Public",
-    userName: "Alice Green",
-    userEmail: "alice@example.com",
-  },
-  {
-    _id: "2",
-    title: "Composting 101: Turn Waste into Gold",
-    topic: "Composting",
-    category: "Composting",
-    difficulty: "Medium",
-    description:
-      "Learn how to start composting in your backyard and reduce kitchen waste naturally.",
-    imageUrl: "https://via.placeholder.com/600x350?text=Compost",
-    availability: "Public",
-    userName: "Bob Soil",
-    userEmail: "bob@example.com",
-  },
-];
-
 export const TipDetails = () => {
   const { id } = useParams();
-  const tip = dummyTips.find((t) => t._id === id);
+  const [tip, setTip] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTip = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/tips/${id}`);
+        const data = await res.json();
+        if (res.ok) {
+          setTip(data);
+        } else {
+          setTip(null);
+        }
+      } catch (err) {
+        console.error("Error loading tip:", err);
+        setTip(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTip();
+  }, [id]);
+
+  if (loading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
 
   if (!tip) {
     return (

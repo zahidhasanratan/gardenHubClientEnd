@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Zoom } from "react-awesome-reveal";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -9,6 +9,9 @@ export const Login = () => {
   const { signIn, signInWithGoogle, setUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,7 +33,7 @@ export const Login = () => {
       });
 
       setTimeout(() => {
-        navigate("/");
+        navigate(from, { replace: true });
       }, 1600);
     } catch (error) {
       Swal.fire({
@@ -55,7 +58,7 @@ export const Login = () => {
       });
 
       setTimeout(() => {
-        navigate("/");
+        navigate(from, { replace: true });
       }, 1600);
     } catch (error) {
       Swal.fire({

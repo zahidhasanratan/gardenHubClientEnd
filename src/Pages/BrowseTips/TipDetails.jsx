@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaThumbsUp } from "react-icons/fa";
+import { Loader } from "../../Components/Loader";
 
 export const TipDetails = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ export const TipDetails = () => {
   }, [id]);
 
   if (loading) {
-    return <div className="text-center py-10">Loading...</div>;
+    return <Loader />;
   }
 
   if (!tip) {

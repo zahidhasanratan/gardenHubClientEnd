@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaFacebookF, FaInstagram, FaEnvelope } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 export const Footer = () => {
   const [theme, setTheme] = useState("light");
 
@@ -34,32 +34,37 @@ export const Footer = () => {
           <h4 className="text-lg font-semibold mb-2">Legal</h4>
           <ul className="space-y-1 text-gray-300 text-sm">
             <li>
-              <a href="#" className="hover:underline hover:text-white">
+              <Link
+                to="/terms-of-service"
+                className="hover:underline hover:text-white"
+              >
                 Terms of Service
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline hover:text-white">
+              <Link
+                to="/privacy-policy"
+                className="hover:underline hover:text-white"
+              >
                 Privacy Policy
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
-        {/* Social Links & Theme Toggle */}
         <div className="flex flex-col gap-4 md:items-end">
           <div>
             <h4 className="text-lg font-semibold mb-2">Follow Us</h4>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="http://facebook.com/"
                 className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition"
                 aria-label="Facebook"
               >
                 <FaFacebookF />
               </a>
               <a
-                href="#"
+                href="http://instagram.com"
                 className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition"
                 aria-label="Instagram"
               >
@@ -68,7 +73,6 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Theme toggle button */}
           <button
             onClick={toggleTheme}
             className="btn btn-sm btn-outline w-full md:w-auto mt-4 md:mt-0"

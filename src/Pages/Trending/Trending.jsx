@@ -73,7 +73,10 @@ export const Trending = () => {
                   className="w-full h-40 object-cover rounded mb-4"
                 />
                 <h3 className="font-semibold text-lg">{tip.title}</h3>
-                <p className="text-sm text-gray-600">Likes: {tip.likes || 0}</p>
+                <p className="text-sm text-gray-600">
+                  Likes:{" "}
+                  {typeof tip.totalLiked === "number" ? tip.totalLiked : 0}
+                </p>
               </div>
             ))}
           </div>

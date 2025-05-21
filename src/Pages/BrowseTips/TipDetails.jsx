@@ -7,6 +7,7 @@ export const TipDetails = () => {
   const { id } = useParams();
   const [tip, setTip] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [likeLoading, setLikeLoading] = useState(false);
 
   useEffect(() => {
     const fetchTip = async () => {
@@ -28,6 +29,42 @@ export const TipDetails = () => {
 
     fetchTip();
   }, [id]);
+
+  const handleLike = async () => {
+    if (!tip) return;
+
+    setTip((prevTip) => ({
+      ...prevTip,
+      totalLiked: (prevTip.totalLiked || 0) + 1,
+    }));
+
+    setLikeLoading(true);
+
+    try {
+      const res = await fetch(`http://localhost:5000/tips/${id}/like`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          totalLiked: (tip.totalLiked || 0) + 1,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to update like count");
+      }
+    } catch (err) {
+      console.error("Error updating like count:", err);
+
+      setTip((prevTip) => ({
+        ...prevTip,
+        totalLiked: (prevTip.totalLiked || 1) - 1,
+      }));
+    } finally {
+      setLikeLoading(false);
+    }
+  };
 
   if (loading) {
     return <Loader />;
@@ -82,8 +119,17 @@ export const TipDetails = () => {
             <p className="text-gray-700 leading-relaxed">{tip.description}</p>
           </div>
 
-          <button className="flex items-center gap-2 bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition">
-            <FaThumbsUp /> Like
+          <button
+            onClick={handleLike}
+            disabled={likeLoading}
+            className={`flex items-center gap-2 px-6 py-2 rounded-full transition ${
+              likeLoading
+                ? "bg-green-400 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700 text-white"
+            }`}
+          >
+            <FaThumbsUp />
+            Like {tip.totalLiked ? `(${tip.totalLiked})` : ""}
           </button>
         </div>
       </div>

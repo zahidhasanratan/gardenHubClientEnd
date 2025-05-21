@@ -28,12 +28,12 @@ export const Header = () => {
   return (
     <header className="bg-base-200 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-primary flex items-center gap-2">
+        <h1 className="text-2xl font-bold flex items-center gap-2">
           <Link
             to="/"
-            className="flex items-center gap-2 hover:text-primary-focus transition"
+            className="flex items-center gap-2 text-green-600 hover:text-green-700 transition"
           >
-            <FaLeaf className="text-primary text-3xl" />
+            <FaLeaf className="text-green-600 text-3xl" />
             Garden Hub
           </Link>
         </h1>

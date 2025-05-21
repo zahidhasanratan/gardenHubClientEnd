@@ -1,9 +1,12 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 export const ShareTip = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     title: "",
     topic: "",
@@ -20,6 +23,7 @@ export const ShareTip = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const tipData = {
       ...formData,
       userEmail: user.email,
@@ -39,7 +43,10 @@ export const ShareTip = () => {
           title: "Tip Shared Successfully!",
           showConfirmButton: false,
           timer: 1500,
+        }).then(() => {
+          navigate("/mytips");
         });
+
         setFormData({
           title: "",
           topic: "",

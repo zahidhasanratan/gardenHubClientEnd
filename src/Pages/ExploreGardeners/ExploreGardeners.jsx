@@ -1,39 +1,30 @@
-import React from "react";
-
-const gardeners = [
-  {
-    id: 1,
-    name: "Alice Green",
-    age: 34,
-    gender: "Female",
-    status: "Active",
-    experience: "5 Years in Urban Gardening",
-    tipsCount: 12,
-    image: "https://via.placeholder.com/150?text=Alice",
-  },
-  {
-    id: 2,
-    name: "Bob Soil",
-    age: 42,
-    gender: "Male",
-    status: "Active",
-    experience: "7 Years in Composting & Sustainability",
-    tipsCount: 18,
-    image: "https://via.placeholder.com/150?text=Bob",
-  },
-  {
-    id: 3,
-    name: "Clara Roots",
-    age: 29,
-    gender: "Female",
-    status: "Inactive",
-    experience: "2 Years in Indoor Plants",
-    tipsCount: 4,
-    image: "https://via.placeholder.com/150?text=Clara",
-  },
-];
+import React, { useEffect, useState } from "react";
 
 export const ExploreGardeners = () => {
+  const [gardeners, setGardeners] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/gardeners")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch gardeners");
+        return res.json();
+      })
+      .then((data) => {
+        setGardeners(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p className="text-center py-10">Loading gardeners...</p>;
+  if (error)
+    return <p className="text-center py-10 text-red-600">Error: {error}</p>;
+
   return (
     <section className="max-w-7xl mx-auto px-4 py-10">
       <h2 className="text-4xl font-bold text-green-700 text-center mb-10">
@@ -43,7 +34,7 @@ export const ExploreGardeners = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {gardeners.map((gardener) => (
           <div
-            key={gardener.id}
+            key={gardener._id}
             className="bg-white rounded-2xl p-5 shadow-md ring-1 ring-green-100 hover:ring-green-400 hover:shadow-xl transition duration-300"
           >
             <img

@@ -25,12 +25,12 @@ export const Trending = () => {
 
   if (loading) {
     return (
-      <section className="bg-green-50 py-20">
+      <section className="bg-base-200 py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-green-700 mb-12">
+          <h2 className="text-3xl font-bold text-center text-primary mb-12">
             🔥 Top Trending Tips
           </h2>
-          <p className="text-center text-gray-600">Loading tips...</p>
+          <p className="text-center text-muted">Loading tips...</p>
         </div>
       </section>
     );
@@ -38,22 +38,22 @@ export const Trending = () => {
 
   if (!tips.length) {
     return (
-      <section className="bg-green-50 py-20">
+      <section className="bg-base-200 py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-green-700 mb-12">
+          <h2 className="text-3xl font-bold text-center text-primary mb-12">
             🔥 Top Trending Tips
           </h2>
-          <p className="text-center text-gray-600">No tips found.</p>
+          <p className="text-center text-muted">No tips found.</p>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="bg-green-50 py-20">
+    <section className="bg-base-200 py-20">
       <div className="max-w-7xl mx-auto px-4">
         <Zoom triggerOnce>
-          <h2 className="text-3xl font-bold text-center text-green-700 mb-12">
+          <h2 className="text-3xl font-bold text-center text-primary mb-12">
             🔥 Top Trending Tips
           </h2>
         </Zoom>
@@ -62,7 +62,7 @@ export const Trending = () => {
             {tips.map((tip) => (
               <div
                 key={tip._id}
-                className="bg-white p-6 rounded-lg shadow hover:shadow-md transition"
+                className="bg-base-100 p-6 rounded-lg shadow hover:shadow-md transition"
               >
                 <img
                   src={
@@ -72,8 +72,10 @@ export const Trending = () => {
                   alt={tip.title}
                   className="w-full h-40 object-cover rounded mb-4"
                 />
-                <h3 className="font-semibold text-lg">{tip.title}</h3>
-                <p className="text-sm text-gray-600">
+                <h3 className="font-semibold text-lg text-base-content">
+                  {tip.title}
+                </h3>
+                <p className="text-sm text-muted">
                   Likes:{" "}
                   {typeof tip.totalLiked === "number" ? tip.totalLiked : 0}
                 </p>

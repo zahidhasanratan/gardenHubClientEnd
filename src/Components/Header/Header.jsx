@@ -1,42 +1,57 @@
 import { Link } from "react-router-dom";
 import { FaLeaf } from "react-icons/fa";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 export const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [theme, setTheme] = useState("light");
   const { user, logout } = useContext(AuthContext);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
 
   const toggleMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
   const handleLogout = () => logout();
 
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
   return (
-    <header className="bg-green-100 sticky top-0 z-50 shadow-md">
+    <header className="bg-base-200 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-green-700 flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-primary flex items-center gap-2">
           <Link
             to="/"
-            className="flex items-center gap-2 hover:text-green-800 transition"
+            className="flex items-center gap-2 hover:text-primary-focus transition"
           >
-            <FaLeaf className="text-green-600 text-3xl" />
+            <FaLeaf className="text-primary text-3xl" />
             Garden Hub
           </Link>
         </h1>
 
-        <nav className="hidden md:flex space-x-6 items-center">
-          <Link to="/" className="hover:text-green-700 font-medium transition">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex space-x-6 items-center text-base-content">
+          <Link to="/" className="hover:text-primary font-medium transition">
             Home
           </Link>
           <Link
             to="/exploreGardeners"
-            className="hover:text-green-700 font-medium transition"
+            className="hover:text-primary font-medium transition"
           >
             Explore Gardeners
           </Link>
           <Link
             to="/BrowseTips"
-            className="hover:text-green-700 font-medium transition"
+            className="hover:text-primary font-medium transition"
           >
             Browse Tips
           </Link>
@@ -44,24 +59,30 @@ export const Header = () => {
             <>
               <Link
                 to="/ShareTip"
-                className="hover:text-green-700 font-medium transition"
+                className="hover:text-primary font-medium transition"
               >
                 Share a Garden Tip
               </Link>
               <Link
                 to="/mytips"
-                className="hover:text-green-700 font-medium transition"
+                className="hover:text-primary font-medium transition"
               >
                 My Tips
               </Link>
             </>
           )}
 
+          <button
+            onClick={toggleTheme}
+            className="btn btn-sm btn-outline"
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+          </button>
+
           {!user ? (
             <Link to="/login">
-              <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-                Login/SignUp
-              </button>
+              <button className="btn btn-primary">Login/SignUp</button>
             </Link>
           ) : (
             <div className="relative">
@@ -69,17 +90,17 @@ export const Header = () => {
                 src={user.photoURL}
                 alt="User"
                 title={user.displayName}
-                className="w-10 h-10 rounded-full cursor-pointer border border-green-500"
+                className="w-10 h-10 rounded-full cursor-pointer border border-primary"
                 onClick={() => setShowDropdown(!showDropdown)}
               />
               {showDropdown && (
-                <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md overflow-hidden z-50">
-                  <div className="px-4 py-2 text-sm text-green-700 font-semibold border-b">
+                <div className="absolute right-0 mt-2 w-40 bg-base-100 shadow-lg rounded-md overflow-hidden z-50">
+                  <div className="px-4 py-2 text-sm font-semibold border-b text-primary">
                     {user.displayName}
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                    className="w-full text-left px-4 py-2 text-sm text-error hover:bg-error/10 transition"
                   >
                     Logout
                   </button>
@@ -89,11 +110,19 @@ export const Header = () => {
           )}
         </nav>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            className="btn btn-sm btn-outline"
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
+
           <button
             onClick={toggleMenu}
-            className="text-green-700 text-2xl focus:outline-none"
+            className="text-primary text-2xl focus:outline-none"
+            aria-label="Toggle Menu"
           >
             ☰
           </button>
@@ -102,40 +131,53 @@ export const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <nav className="md:hidden px-4 pb-4 space-y-2 bg-green-50 shadow">
-          <Link to="/" className="block text-green-700 font-medium">
+        <nav className="md:hidden px-4 pb-4 space-y-2 bg-base-200 shadow text-base-content">
+          <Link to="/" className="block hover:text-primary font-medium">
             Home
           </Link>
           <Link
             to="/exploreGardeners"
-            className="block text-green-700 font-medium"
+            className="block hover:text-primary font-medium"
           >
             Explore Gardeners
           </Link>
-          <Link to="/BrowseTips" className="block text-green-700 font-medium">
+          <Link
+            to="/BrowseTips"
+            className="block hover:text-primary font-medium"
+          >
             Browse Tips
           </Link>
           {user && (
             <>
-              <Link to="/ShareTip" className="block text-green-700 font-medium">
+              <Link
+                to="/ShareTip"
+                className="block hover:text-primary font-medium"
+              >
                 Share a Garden Tip
               </Link>
-              <Link to="/mytips" className="block text-green-700 font-medium">
+              <Link
+                to="/mytips"
+                className="block hover:text-primary font-medium"
+              >
                 My Tips
               </Link>
             </>
           )}
+
+          <button
+            onClick={toggleTheme}
+            className="btn btn-sm btn-outline w-full"
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          </button>
+
           {!user ? (
             <Link to="/login">
-              <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
-                Login/SignUp
-              </button>
+              <button className="btn btn-primary w-full">Login/SignUp</button>
             </Link>
           ) : (
-            <button
-              onClick={handleLogout}
-              className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
-            >
+            <button onClick={handleLogout} className="btn btn-error w-full">
               Logout
             </button>
           )}

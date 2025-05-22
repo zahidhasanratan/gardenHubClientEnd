@@ -7,7 +7,7 @@ export const Features = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/gardeners") // change URL if deployed
+    fetch("https://gardenhub.vercel.app/api/gardeners") // change URL if deployed
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch gardeners");
         return res.json();

@@ -9,7 +9,7 @@ export const Trending = () => {
     const fetchTrendingTips = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/tips?limit=6&sort=likes"
+          "https://gardenhub.vercel.app/tips?limit=6&sort=likes"
         );
         const data = await res.json();
         setTips(data);

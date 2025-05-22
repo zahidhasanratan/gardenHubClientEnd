@@ -16,7 +16,7 @@ export const BrowseTips = () => {
   useEffect(() => {
     const fetchTips = async () => {
       try {
-        const res = await fetch("http://localhost:5000/tips");
+        const res = await fetch("https://gardenhub.vercel.app/tips");
         if (!res.ok) throw new Error("Failed to fetch tips");
 
         const data = await res.json();

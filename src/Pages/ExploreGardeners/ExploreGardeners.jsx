@@ -6,7 +6,7 @@ export const ExploreGardeners = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/gardeners")
+    fetch("https://gardenhub.vercel.app/api/gardeners")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch gardeners");
         return res.json();

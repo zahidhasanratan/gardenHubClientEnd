@@ -12,7 +12,7 @@ export const TipDetails = () => {
   useEffect(() => {
     const fetchTip = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/tips/${id}`);
+        const res = await fetch(`https://gardenhub.vercel.app/tips/${id}`);
         const data = await res.json();
         if (res.ok) {
           setTip(data);
@@ -41,7 +41,7 @@ export const TipDetails = () => {
     setLikeLoading(true);
 
     try {
-      const res = await fetch(`http://localhost:5000/tips/${id}/like`, {
+      const res = await fetch(`https://gardenhub.vercel.app/tips/${id}/like`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

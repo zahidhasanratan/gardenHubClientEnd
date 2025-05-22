@@ -14,7 +14,7 @@ export const MyTips = () => {
     const fetchUserTips = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/tips?userEmail=${user.email}`
+          `https://gardenhub.vercel.app/tips?userEmail=${user.email}`
         );
 
         const data = await res.json();
@@ -45,9 +45,12 @@ export const MyTips = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch(`http://localhost:5000/tips/${tip._id}`, {
-            method: "DELETE",
-          });
+          const res = await fetch(
+            `https://gardenhub.vercel.app/tips/${tip._id}`,
+            {
+              method: "DELETE",
+            }
+          );
 
           if (res.ok) {
             setTips((prevTips) => prevTips.filter((t) => t._id !== tip._id));

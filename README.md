@@ -1,12 +1,32 @@
-# React + Vite
+# 🌱 Garden Hub - Share & Explore Gardening Tips
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site URL:** [https://whimsical-kringle-1987f8.netlify.app/](https://whimsical-kringle-1987f8.netlify.app/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📝 Project Description
 
-## Expanding the ESLint configuration
+**Garden Hub** is a community-driven web application where garden enthusiasts can share their favorite gardening tips, explore advice from others, and connect over sustainable and eco-friendly practices. The platform supports creating, updating, and managing tips with ease, all while maintaining user authentication and personalized content visibility.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+- 🔐 **Authentication with Firebase** – Secure email/password and Google sign-in system.
+- 🧑‍🌾 **Private and Public Tips** – Users can choose to make tips visible only to themselves or publicly available.
+- 📝 **Tip Management (CRUD)** – Authenticated users can add, view, update, and delete their gardening tips.
+- 📊 **Like System** – Tips can be liked by other users, with total likes displayed and sorted.
+- 🎨 **Responsive UI with Tailwind CSS** – Clean and responsive design for all devices.
+- 📂 **Categories and Topics** – Tips are categorized and include topics and difficulty levels.
+- 🔍 **Browse & Search Tips** – Users can browse public tips and explore the gardening community.
+
+---
+
+## 🚀 Tech Stack
+
+- **Frontend:** React + Tailwind CSS + React Router
+- **Backend:** Node.js + Express.js + MongoDB
+- **Authentication:** Firebase Auth (Email/Password + Google)
+- **Deployment:** Netlify (Frontend) & Vercel (Backend)
+
+---

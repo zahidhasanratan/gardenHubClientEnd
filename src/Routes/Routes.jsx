@@ -16,6 +16,8 @@ import { UpdateTip } from "../Pages/MyTips/UpdateTip";
 import { PageWithTitle } from "../Components/PageWithTitle";
 import { TermsOfService } from "../Pages/TermsOfService/TermsOfService";
 import { PrivacyPolicy } from "../Pages/PrivacyPolicy/PrivacyPolicy";
+import { About } from "../Pages/About/About";
+import { Contac } from "../Pages/Contact/Contac";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +33,22 @@ export const router = createBrowserRouter([
               <Home />
             </PageWithTitle>
           </Suspense>
+        ),
+      },
+      {
+        path: "/about",
+        element: (
+          <PageWithTitle title="Garden Hub - About">
+            <About />
+          </PageWithTitle>
+        ),
+      },
+      {
+        path: "/contact",
+        element: (
+          <PageWithTitle title="Garden Hub - Contact Us">
+            <Contac />
+          </PageWithTitle>
         ),
       },
       {

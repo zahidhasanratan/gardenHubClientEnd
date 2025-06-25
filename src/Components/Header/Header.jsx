@@ -44,6 +44,12 @@ export const Header = () => {
             Home
           </Link>
           <Link
+            to="/about"
+            className="hover:text-primary font-medium transition"
+          >
+            About Us
+          </Link>
+          <Link
             to="/exploreGardeners"
             className="hover:text-primary font-medium transition"
           >
@@ -71,7 +77,12 @@ export const Header = () => {
               </Link>
             </>
           )}
-
+          <Link
+            to="/contact"
+            className="hover:text-primary font-medium transition"
+          >
+            Contact Us
+          </Link>
           <button
             onClick={toggleTheme}
             className="btn btn-sm btn-outline"

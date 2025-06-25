@@ -1,6 +1,6 @@
 # 🌱 Garden Hub - Share & Explore Gardening Tips
 
-**Live Site URL:** [https://whimsical-kringle-1987f8.netlify.app/](https://whimsical-kringle-1987f8.netlify.app/)
+**Live Site URL:** [https://symphonious-fox-932bb7.netlify.app](https://symphonious-fox-932bb7.netlify.app/)
 
 ---
 
